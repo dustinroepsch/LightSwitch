@@ -28,12 +28,15 @@ class _DeviceSearchState extends State<DeviceSearch> {
         itemBuilder: (BuildContext context, int index) {
           var keys = scanResults.keys.toList();
           var result = scanResults[keys[index]];
-          return Card(
-            child: Text(result.device.name),
+          return RaisedButton(
+            onPressed: () => {},
+            child: Text(result.device.name, style: Theme.of(context).accentTextTheme.button,),
+            color: Theme.of(context).accentColor,
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.refresh),
         onPressed: _startScan,
       ),
     );
@@ -68,15 +71,15 @@ class _DeviceSearchState extends State<DeviceSearch> {
   }
 
   _startScan() {
+    setState(() {
+      scanResults.clear();
+    });
     print("Scanning!");
-    _scanSubscription = _flutterBlue
-        .scan(
-      timeout: const Duration(seconds: 5),
-      /*withServices: [
-          new Guid('0000180F-0000-1000-8000-00805F9B34FB')
-        ]*/
-    )
-        .listen((scanResult) {
+    _scanSubscription = _flutterBlue.scan(
+        timeout: const Duration(seconds: 5),
+        withServices: [
+          new Guid('df430000-caf7-4a3c-a9c4-4549cbf100fb')
+        ]).listen((scanResult) {
       print('localName: ${scanResult.advertisementData.localName}');
       print(
           'manufacturerData: ${scanResult.advertisementData.manufacturerData}');
