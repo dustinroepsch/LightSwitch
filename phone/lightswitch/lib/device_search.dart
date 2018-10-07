@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:lightswitch/landing_page.dart';
+
 class _DeviceSearchState extends State<DeviceSearch> {
   FlutterBlue _flutterBlue = FlutterBlue.instance;
   StreamSubscription _stateSubscription;
@@ -29,7 +31,12 @@ class _DeviceSearchState extends State<DeviceSearch> {
           var keys = scanResults.keys.toList();
           var result = scanResults[keys[index]];
           return RaisedButton(
-            onPressed: () => {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return LandingPage(device: result.device);
+                }));
+            },
             child: Text(result.device.name, style: Theme.of(context).accentTextTheme.button,),
             color: Theme.of(context).accentColor,
           );

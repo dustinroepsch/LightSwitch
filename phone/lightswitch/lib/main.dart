@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'landing_page.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+// import 'landing_page.dart';
+// import 'package:flutter_blue/flutter_blue.dart';
 import 'device_search.dart';
 
 void main() => runApp(new MyApp());
